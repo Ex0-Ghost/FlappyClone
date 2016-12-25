@@ -14,7 +14,7 @@ public class Menu implements GameState {
 	int selected = 0;
 	boolean inCredits = false;
 
-	public Menu(StateManager statemanager) {
+	Menu(StateManager statemanager) {
 		// TODO Auto-generated constructor stub
 		stateManager = statemanager;
 
@@ -22,7 +22,7 @@ public class Menu implements GameState {
 		Bold = new Font("normal", 1, 40);
 	}
 
-	void up() { // move up
+	private void up() { // move up
 		if (selected > 0) {// we aren't at the top
 			selected--;
 		} else if (selected == 0) { // we are at top start from bottom
@@ -30,7 +30,7 @@ public class Menu implements GameState {
 		}
 	}
 
-	void down() {
+	private void down() {
 		if (selected < texts.length - 1) {// if we aren't at the end
 			selected++;
 		} else if (selected == texts.length - 1) { // we are at the end, start
@@ -39,7 +39,7 @@ public class Menu implements GameState {
 		}
 	}
 
-	void doSelcected() {
+	private void doSelcected() {
 		switch (selected) {
 		case 0:// resume
 			resume();
@@ -61,7 +61,7 @@ public class Menu implements GameState {
 		}
 	}
 
-	void drawCredits(Graphics2D g2d) {
+	private void drawCredits(Graphics2D g2d) {
 		// TODO Auto-generated method stub
 		g2d.setColor(Color.white);
 		g2d.setFont(new Font("s", 1, 20));
@@ -92,7 +92,7 @@ public class Menu implements GameState {
 	}
 
 	void resume() {
-		stateManager.state = State.running;
+		stateManager.state = State.RUNNING;
 	}
 
 	@Override

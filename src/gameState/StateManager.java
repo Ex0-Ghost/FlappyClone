@@ -4,38 +4,39 @@ import java.awt.Graphics2D;
 
 public class StateManager {
 	public enum State {
-		notstarted, running, menu, over
+		PRE_START, RUNNING, MENU, OVER
 	}
 
-	public State state;
-	public Menu menu;
-	public PreStart notstarted;
-	public GameOver over;
-	public Running running;
+	State state;
+	
+	private Menu menu;
+	private PreStart prestart;
+	private GameOver over;
+	Running running;
 
 	public StateManager() {
 		menu = new Menu(this);
-		notstarted = new PreStart(this);
+		prestart = new PreStart(this);
 		over = new GameOver(this);
 		running = new Running(this);
-		state = State.notstarted;
+		state = State.PRE_START;
 	}
 
 	public void keypressed(int kcode) {
 		switch (state) {
-		case notstarted:
-			notstarted.keypressed(kcode);
+		case PRE_START:
+			prestart.keypressed(kcode);
 			;
 			break;
-		case running:
+		case RUNNING:
 			running.keypressed(kcode);
 			;
 			break;
-		case menu:
+		case MENU:
 			menu.keypressed(kcode);
 			;
 			break;
-		case over:
+		case OVER:
 			over.keypressed(kcode);
 			;
 			break;
@@ -45,16 +46,16 @@ public class StateManager {
 
 	public void update() {
 		switch (state) {
-		case notstarted:
-			notstarted.update();
+		case PRE_START:
+			prestart.update();
 			break;
-		case running:
+		case RUNNING:
 			running.update();
 			break;
-		case menu:
+		case MENU:
 			menu.update();
 			break;
-		case over:
+		case OVER:
 			over.update();
 			break;
 		}
@@ -62,17 +63,17 @@ public class StateManager {
 
 	public void Render(Graphics2D g2d) {
 		switch (state) {
-		case notstarted:
-			notstarted.draw(g2d);
+		case PRE_START:
+			prestart.draw(g2d);
 			break;
-		case running:
+		case RUNNING:
 			running.draw(g2d);
 			break;
-		case menu:
+		case MENU:
 			running.draw(g2d);
 			menu.draw(g2d);
 			break;
-		case over:
+		case OVER:
 			over.draw(g2d);
 			break;
 		}

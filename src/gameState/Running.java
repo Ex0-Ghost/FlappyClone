@@ -11,34 +11,34 @@ import mybird.*;
 public class Running implements GameState {
 	StateManager stateManager;
 	public int score = 0;
-	private static int cs = 0;// column set either 0 or 1 see spawncolumn()
+	private int cs = 0;// column set either 0 or 1 see spawncolumn()
 								// method
-	public static Bird bird = new Bird();
-	public static Random rand = new Random();
-	public static Background background = new Background();
-	public static int ygap = 120;
-	public static int xgap = 350;
+	private Bird bird = new Bird();
+	private Random rand = new Random();
+	private Background background = new Background();
+	private int ygap = 120;
+	private int xgap = 350;
 	// ====creating columns=====//
-	public static TopColumn column1 = new TopColumn(); // creating top column
-	public static BottomColumn column2 = new BottomColumn(); // creating bottom
+	private TopColumn column1 = new TopColumn(); // creating top column
+	private BottomColumn column2 = new BottomColumn(); // creating bottom
 																// column
-	public static TopColumn column3 = new TopColumn(); // creating top column
-	public static BottomColumn column4 = new BottomColumn(); // creating bottom
+	private TopColumn column3 = new TopColumn(); // creating top column
+	private BottomColumn column4 = new BottomColumn(); // creating bottom
 																// column
-	public static Obstacle columns[] = { column1, column2, column3, column4 }; // an
+	private Obstacle columns[] = { column1, column2, column3, column4 }; // an
 																				// array
 																				// contains
 																				// all
 																				// columns
 
-	public Running(StateManager statemanager) {
+	 Running(StateManager statemanager) {
 		// TODO Auto-generated constructor stub
 		stateManager = statemanager;
 		bird.x = Main.frame.getWidth() / 2 - 180;
 		bird.y = Main.frame.getHeight() / 2 - 20;
 	}
 
-	public void jump() {
+	private void jump() {
 		if (Main.soundstate == "on") {
 			Sound.playSound("jump.wav", 0);
 		}
@@ -46,8 +46,8 @@ public class Running implements GameState {
 		bird.theta = -1;
 	}
 
-	public void startgame() {
-		stateManager.state = State.running;
+	 void startgame() {
+		stateManager.state = State.RUNNING;
 		score = 0;
 		bird.x = Main.frame.getWidth() / 2 - 180;
 		bird.y = Main.frame.getHeight() / 2 - 20;
@@ -63,7 +63,7 @@ public class Running implements GameState {
 		for (int i = 0; i < 4; i = i + 2) { // add 1 score if we pass an column.
 											// just checking one of two pipe
 											// pairs no need for the other
-			if (stateManager.state == State.running && bird.x > columns[i].x + 50 && !columns[i].passed) {
+			if (stateManager.state == State.RUNNING && bird.x > columns[i].x + 50 && !columns[i].passed) {
 				score++;
 				columns[i].passed = true;
 			}
@@ -75,7 +75,7 @@ public class Running implements GameState {
 																													// with
 																													// an
 																													// column
-			stateManager.state = State.over;
+			stateManager.state = State.OVER;
 			for (int i = 0; i < 4; i++) {
 				columns[i].reset();
 			}
@@ -122,7 +122,7 @@ public class Running implements GameState {
 		g2d.drawString("sound: " + Main.soundstate, 120, 20);
 	}
 
-	public void spawncolumn() {
+	private void spawncolumn() {
 		Obstacle current1 = column1, current2 = column2;
 		if (cs == 1) {
 			current1 = column3;
@@ -151,7 +151,7 @@ public class Running implements GameState {
 			Main.muteSwithch();
 			break;
 		case 27: // Esc key code
-			stateManager.state = State.menu;
+			stateManager.state = State.MENU;
 			break;
 		}
 	}

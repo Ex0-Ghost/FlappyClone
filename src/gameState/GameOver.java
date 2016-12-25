@@ -11,7 +11,7 @@ public class GameOver implements GameState {
 	int count; // increases every update
 	int waitcount = 40; // how many count need to be so player can restart
 
-	public GameOver(StateManager statemanager) {
+	GameOver(StateManager statemanager) {
 		// TODO Auto-generated constructor stub
 		stateManager = statemanager;
 	}

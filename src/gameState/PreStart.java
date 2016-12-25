@@ -11,7 +11,7 @@ public class PreStart implements GameState {
 	Background background = new Background();
 	StateManager stateManager;
 
-	public PreStart(StateManager statemanager) {
+	PreStart(StateManager statemanager) {
 		// TODO Auto-generated constructor stub
 		stateManager = statemanager;
 	}
@@ -35,7 +35,7 @@ public class PreStart implements GameState {
 
 	@Override
 	public void keypressed(int kcode) {
-		stateManager.state = State.running;
+		stateManager.state = State.RUNNING;
 		stateManager.running.startgame();
 	}
 
