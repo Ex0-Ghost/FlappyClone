@@ -11,13 +11,13 @@ import mybird.*;
 public class Running implements GameState {
 	StateManager stateManager;
 	public int score = 0;
-	private int cs = 0;// column set either 0 or 1 see spawncolumn()
-								// method
+	private int cs = 0;// column set either 0 or 1 see spawncolumn() method
+	private boolean isStarted = false;
 	private Bird bird = new Bird();
 	private Random rand = new Random();
 	private Background background = new Background();
 	private int ygap = 120;
-	private int xgap = 350;
+	private int xgap = 350;//we will find a use for this ;)
 	// ====creating columns=====//
 	private TopColumn column1 = new TopColumn(); // creating top column
 	private BottomColumn column2 = new BottomColumn(); // creating bottom
@@ -38,48 +38,53 @@ public class Running implements GameState {
 		bird.y = Main.frame.getHeight() / 2 - 20;
 	}
 
-	private void jump() {
+	 public int getScore(){
+		 return score;
+	 }
+	 
+	 private void jump() {
 		if (Main.soundstate == "on") {
 			Sound.playSound("jump.wav", 0);
 		}
 		bird.yv = -12;
 		bird.theta = -1;
 	}
-
-	 void startgame() {
-		stateManager.state = State.RUNNING;
-		score = 0;
-		bird.x = Main.frame.getWidth() / 2 - 180;
-		bird.y = Main.frame.getHeight() / 2 - 20;
-		bird.yv = 0;
-		spawncolumn();// spawn columns
+private void reset(){
+	for (int i = 0; i < 4; i++) {
+		columns[i].reset();
 	}
+	score = 0;
+	bird.x = Main.frame.getWidth() / 2 - 180;
+	bird.y = Main.frame.getHeight() / 2 - 20;
+	bird.yv = 0;
+	cs = 0;// this is useful in spawning columns look at that method
+	spawncolumn();// spawn columns
+	isStarted = true;
+}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		if(!isStarted){//if we've just swiched to this state reset this state
+			reset();
+		}
+		
 		background.move();
 		bird.update();
 		for (int i = 0; i < 4; i = i + 2) { // add 1 score if we pass an column.
 											// just checking one of two pipe
 											// pairs no need for the other
-			if (stateManager.state == State.RUNNING && bird.x > columns[i].x + 50 && !columns[i].passed) {
+			if (bird.x > columns[i].x + 50 && !columns[i].passed) {
 				score++;
 				columns[i].passed = true;
+				
 			}
 		}
-		if (bird.y > 580 || bird.coll(column1) || bird.coll(column2) || bird.coll(column3) || bird.coll(column4)) {// if
-																													// our
-																													// bird
-																													// collides
-																													// with
-																													// an
-																													// column
-			stateManager.state = State.OVER;
-			for (int i = 0; i < 4; i++) {
-				columns[i].reset();
-			}
-			cs = 0;// this is useful in spawning columns look at that method
+		if (bird.y > 580 || bird.coll(column1) || bird.coll(column2) || bird.coll(column3) || bird.coll(column4)) {// if the bird collides with an column 
+			isStarted = false;
+			stateManager.setState(State.OVER);
+			
+			
 		} else {
 			// reseting columns if its off screen needs some work
 			for (int i = 0; i < 3; i = i + 2) {
@@ -93,7 +98,7 @@ public class Running implements GameState {
 
 			if (bird.y + bird.yv < 0) { // if bird jump (y velocity) throws the
 										// bird outside screen then fit the jump
-										// to remaining to the top
+										// to the space remaining to the top
 				bird.yv = 0 - bird.y;
 			}
 			bird.y = bird.y + bird.yv; // y velocity
@@ -151,7 +156,7 @@ public class Running implements GameState {
 			Main.muteSwithch();
 			break;
 		case 27: // Esc key code
-			stateManager.state = State.MENU;
+			stateManager.setState(State.MENU);
 			break;
 		}
 	}

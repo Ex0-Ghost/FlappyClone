@@ -3,6 +3,8 @@ package gameState;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+
+import gameState.StateManager.State;
 import mybird.Main;
 
 public class GameOver implements GameState {
@@ -28,7 +30,13 @@ public class GameOver implements GameState {
 		g2d.drawString("game over", 220, 250);
 		Font font2 = new Font("my font", 8, 30);
 		g2d.setFont(font2);
-		g2d.drawString("your score was:" + stateManager.running.score, 280, 300);
+		/*
+		 * here below when we retrieve running state we need casting because 
+		 * GameState type(which getState() method returns) isn't used to have getScore method
+		 * and because we're sure that we're getting Running type instance we need to cast it
+		 * to be able to use methods which Running type defines 
+		 */
+		g2d.drawString("your score was:" + ((Running) stateManager.getState(State.RUNNING)).getScore(), 280, 300);
 		if (canrestart)
 			g2d.drawString("press space to restart the game", 200, 345);
 
@@ -46,7 +54,7 @@ public class GameOver implements GameState {
 	public void keypressed(int kcode) {
 		// TODO Auto-generated method stub
 		if ((canrestart) && (kcode == 32)) {
-			stateManager.running.startgame();
+			stateManager.setState(State.RUNNING);
 			count = 0;
 			canrestart = false;
 		}

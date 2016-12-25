@@ -35,8 +35,7 @@ public class PreStart implements GameState {
 
 	@Override
 	public void keypressed(int kcode) {
-		stateManager.state = State.RUNNING;
-		stateManager.running.startgame();
+		stateManager.setState(State.RUNNING);
 	}
 
 }

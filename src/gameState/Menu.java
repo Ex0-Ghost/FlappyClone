@@ -44,7 +44,7 @@ public class Menu implements GameState {
 		case 0:// resume
 			resume();
 		case 1:// point hack
-			stateManager.running.score++;
+			System.out.println("sorry you have to work for that");
 			break;
 		case 2:// Credits
 			inCredits = true;
@@ -92,7 +92,7 @@ public class Menu implements GameState {
 	}
 
 	void resume() {
-		stateManager.state = State.RUNNING;
+		stateManager.setState(State.RUNNING);
 	}
 
 	@Override
