@@ -51,7 +51,6 @@ public class Main {
 		gloop = new Thread() {
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
 				super.run();
 				/*
 				 * some code to test game performance long count=0;
@@ -65,7 +64,7 @@ public class Main {
 					 * " or: " + System.currentTimeMillis()); long st =
 					 * System.nanoTime();
 					 */
-					Tasker.updateandrender();
+					Tasker.updateAndRender();
 					/*
 					 * some code to test game performance
 					 * System.out.println("end time:   " + System.nanoTime() +

@@ -8,7 +8,7 @@ import gameState.StateManager;
 public class Tasker implements KeyListener {
 	StateManager stateManager = Main.stateManager;
 
-	public void updateandrender() {
+	public void updateAndRender() {
 		stateManager.update();
 		Main.panel.repaint();
 	}
@@ -19,7 +19,7 @@ public class Tasker implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode());
+		System.out.println(e.getKeyCode());//debugging
 		stateManager.keypressed(e.getKeyCode());
 
 	}

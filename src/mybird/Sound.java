@@ -19,7 +19,7 @@ public class Sound {
 			clips.add(clip);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-			System.out.println("cant loadsound file" + url);
+			System.out.println("cant load sound file" + url);
 		}
 
 	}

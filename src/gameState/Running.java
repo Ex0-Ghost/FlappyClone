@@ -12,7 +12,7 @@ public class Running implements GameState {
 	StateManager stateManager;
 	public int score = 0;
 	private int cs = 0;// column set either 0 or 1 see spawncolumn() method
-	private boolean isStarted = false;
+	private boolean justSwitched = false;
 	private Bird bird = new Bird();
 	private Random rand = new Random();
 	private Background background = new Background();
@@ -32,7 +32,6 @@ public class Running implements GameState {
 																				// columns
 
 	 Running(StateManager statemanager) {
-		// TODO Auto-generated constructor stub
 		stateManager = statemanager;
 		bird.x = Main.frame.getWidth() / 2 - 180;
 		bird.y = Main.frame.getHeight() / 2 - 20;
@@ -59,13 +58,12 @@ private void reset(){
 	bird.yv = 0;
 	cs = 0;// this is useful in spawning columns look at that method
 	spawncolumn();// spawn columns
-	isStarted = true;
+	justSwitched = true;
 }
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		if(!isStarted){//if we've just swiched to this state reset this state
+		if(!justSwitched){//if we've just swiched to this state reset this state
 			reset();
 		}
 		
@@ -81,7 +79,7 @@ private void reset(){
 			}
 		}
 		if (bird.y > 580 || bird.coll(column1) || bird.coll(column2) || bird.coll(column3) || bird.coll(column4)) {// if the bird collides with an column 
-			isStarted = false;
+			justSwitched = false;
 			stateManager.setState(State.OVER);
 			
 			
@@ -113,7 +111,6 @@ private void reset(){
 
 	@Override
 	public void draw(Graphics2D g2d) {
-		// TODO Auto-generated method stub
 		// draw the game
 		background.draw(g2d);
 		bird.draw(g2d); // draw bird
@@ -147,7 +144,6 @@ private void reset(){
 
 	@Override
 	public void keypressed(int kcode) {
-		// TODO Auto-generated method stub
 		switch (kcode) {
 		case 32: // space key code
 			jump();

@@ -15,7 +15,6 @@ public class Menu implements GameState {
 	boolean inCredits = false;
 
 	Menu(StateManager statemanager) {
-		// TODO Auto-generated constructor stub
 		stateManager = statemanager;
 
 		Normal = new Font("normal", 1, 20);
@@ -62,7 +61,6 @@ public class Menu implements GameState {
 	}
 
 	private void drawCredits(Graphics2D g2d) {
-		// TODO Auto-generated method stub
 		g2d.setColor(Color.white);
 		g2d.setFont(new Font("s", 1, 20));
 		g2d.drawString("created by rekar email: rk_r93@yahoo.com for learning purposes", 10, 200);
@@ -70,12 +68,10 @@ public class Menu implements GameState {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void draw(Graphics2D g2d) {
-		// TODO Auto-generated method stub
 		if (inCredits) {
 			drawCredits(g2d);
 		} else {
@@ -97,7 +93,6 @@ public class Menu implements GameState {
 
 	@Override
 	public void keypressed(int kcode) {
-		// TODO Auto-generated method stub
 		switch (kcode) {
 		case 27: // ESC key
 			if (!inCredits) {

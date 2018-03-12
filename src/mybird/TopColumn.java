@@ -2,15 +2,11 @@ package mybird;
 
 import java.io.IOException;
 import java.net.URL;
-
 import javax.imageio.ImageIO;
 
 public class TopColumn extends Obstacle {
-	URL imgurl;
-	public boolean passed = false;
 
 	public TopColumn() {
-
 		URL imgurl = this.getClass().getResource("/mybird/resources/images/ttube.png");
 		try {
 			Img = ImageIO.read(imgurl);

@@ -12,19 +12,16 @@ public class PreStart implements GameState {
 	StateManager stateManager;
 
 	PreStart(StateManager statemanager) {
-		// TODO Auto-generated constructor stub
 		stateManager = statemanager;
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void draw(Graphics2D g2d) {
-		// TODO Auto-generated method stub
 		background.draw(g2d);
 		g2d.setColor(Color.white);
 		g2d.setFont(new Font("s", 1, 20));

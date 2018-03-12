@@ -9,12 +9,9 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class Bird {
-	public double theta;
-	private BufferedImage bird, bird1, bird2, bird3; // bird is a pointer points to
-												// current bird frame others are
-												// the frames
-	public int x, y, width, height, yv = 0, f = 0;// f is for frame update
-													// purposes see update()
+	public double theta;//bird's angle in rad
+	private BufferedImage bird, bird1, bird2, bird3; // bird referes to current bird frame others are the frames
+	public int x, y, width, height, yv = 0, f = 0;// f is for frame update purposes see update()
 	AffineTransform at = new AffineTransform();
 
 	public Bird() {
@@ -28,7 +25,6 @@ public class Bird {
 			bird2 = ImageIO.read(url2);
 			bird3 = ImageIO.read(url3);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		bird = bird1;
@@ -36,7 +32,6 @@ public class Bird {
 		this.y = 280;
 		this.height = bird.getHeight();
 		this.width = bird.getWidth();
-		// set the frame
 	}
 
 	public void update() {
@@ -69,11 +64,11 @@ public class Bird {
 		// see rotate method and affinetransform to see how this works
 		g2d.drawImage(bird, (int) (x * Math.cos(-theta) + (-y * Math.sin(-theta))),
 				(int) (x * Math.sin(-theta) + (y * Math.cos(-theta))), width, height, null);
-		// g2d.drawImage(bird, x, y, null); //this is rotated bird around 0,0 of
+		 //g2d.drawImage(bird, x, y, null); //this is rotated bird around 0,0 of
 		// screen
 		g2d.rotate(-theta); // rotate g2d to its original state
-		// g2d.drawRect(x, y, width, height); //draw a rect to show the bird hit box
-		// note the bird's hit box will be diffrent from bird image
+		//g2d.drawRect(x, y, width, height); //draw a rect to show the bird hit box
+		// note that the bird's hit box will be diffrent from bird image
 	}
 
 	public boolean coll(Obstacle c) { // bird collision detection with an column

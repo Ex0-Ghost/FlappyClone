@@ -9,18 +9,16 @@ import javax.imageio.ImageIO;
 
 public class Background {
 	private BufferedImage Img;
-	private URL Imgurl;
+
 	private int x, y, count;
 
 	public Background() {
 		x = 0;
 		y = 0;
-		// TODO Auto-generated constructor stub
-		Imgurl = this.getClass().getResource("/mybird/resources/images/bg.png");
+		URL Imgurl = this.getClass().getResource("/mybird/resources/images/bg.png");
 		try {
 			Img = ImageIO.read(Imgurl);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
